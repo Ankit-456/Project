@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Ankit</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Ankit Special Edition
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Kuch log hamari life mein unexpectedly aate hain, yet ek lasting impact chhod jaate hain. tum un rare souls mein se ek ho jo har moment ko thoda aur special bana dete ho.
+
+        Pehli hi conversation se, tum mein kuch khaas tha—tumhara kindness, tumhara charm, aur jis effortless way se tum apne aas-paas ki duniya ko roshan karte ho.
+        
+        Yeh sirf words ka collection nahin hai; yeh dikhane ka ek chota sa tareeka hai ki tum mere liye kitne mayne rakhte ho. Tumhe yeh yaad dilane ka ek tareeka ki tum appreciable, admirable aur truly special ho.
+        
+        So, here's to us—hamari conversations, hamara connection, aur aane wale beautiful moments ke liye.💖</p>
+
+          <p>
+            Start Reading... <br />Since we met
+            on April 8th, 2021 ....
+          </p>
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+            It's incredible to think kaise, just kuch din pehle, main tumhe jaanta bhi nahi tha. Tumse milna ek moment of fate tha jiske liye main hamesha grateful rahunga.
+
+Pehle, main sure nahi tha ki kaise connect karenge, kya baat karenge, ya tum kaise person hoge. Lekin ab, tumhare saath time spend karne ke baad, maine kuch truly special realize kiya—
+
+You're absolutely amazing. 💖
+
+Tumhare words, tumhari kindness, aur jis tarah se tum mujhe smile karate ho, already mere dil mein jagah bana li hai. Maine kabhi expect nahi kiya tha ki tumhare jaise kisi se milunga, lekin ab, main imagine bhi nahi kar sakta ki tum meri life mein nahi ho.
+
+Shayad yeh destiny tha, ya shayad sirf luck—lekin jo bhi tha, main khush hoon hoon ki yeh mujhe tum tak le aaya. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            Tum mein ek charm hai, ek beauty jo words mai explain karna mushkil hai. Yeh tumhari eyes ki sparkle mein hai, tumhari smile ki warmth mein hai, aur jis effortless way se tum har moment ko light up kar deti ho usme hai. Tumhari har ek cheez itni perfect, itni mesmerizing lagti hai ki main humesha sochta hoon—
+
+Kya tumhe ek masterpiece ki tarah craft kiya gaya tha?
+
+Aisa lagta hai jaise universe ne apna time liya, carefully kisi wonderful person ko shape kiya, just world ko thoda aur brighter banane ke liye.  Aur sach me, tum karti ho bright mere har single day. 💕
+
+Tumhari presence ek soft melody jaisi lagti hai, soothing yet unforgettable. Jis tarah se tum apne aap ko carry karti ho, tumhare heart ki kindness, aur tumhari soul ki purity tumhe aur bhi special bana deti hai. Yeh sirf iske baare mein nahi hai ki tum kitni beautiful dikhti ho—yeh iske baare mein hai ki tum truly kitni beautiful ho.
+
+Har baar jab main tumhe dekhta hoon, mujhe yaad aa jata hai ki life mein kuch cheezein simply magical hoti hain, aur tum, without a doubt, unmein se ek ho. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength Within You 💫✨</h2>
+          <p>
+            Tumhari beauty se bhi beyond, jo truly standout karta hai woh hai tumhara dil. Tum sirf aise person nahi ho jisko sirf isliye admire karo ki woh kaise dikhti hai—tum bahut saaf dil ki ho. Jis tarah se tum focused sochti ho, sabke khayal rakhti ho, aur har cheez mein apna best deti ho woh mujhe tumhe aur bhi zyada respect karne pe majboor karta hai.
+
+Tum ek true leader ho.
+
+Tumhara kindness, aur strength tumhe alag karta hai. Tum sirf ek path follow nahi karti—tum ek create karte ho. Tumhara kindness aur care dekh kar mujhe yaad aata hai ki true beauty sirf appearance ke baare mein nahi hoti, balki tumhare andar ke insaan ke baare mein hoti hai. Aur wohi cheez tumhe truly incredible banati hai. 💖✨
+
+Koi challenge tumhare liye zyada bada nahi hai, aur koi goal out of reach nahi hai. Tum apne aas-paas ke logon ko better banne ke liye, bigger dream karne ke liye, aur apne aap mein believe karne ke liye inspire karti ho. Tumhe dekh kar kabhi kabhi mai sochta hu ki aise bhi koi larki hoti hai aur jo mujhe mili.🌟
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            Tumse baat karna mere din ka ek highlight ban gaya hai. Har baar jab main tumhara message dekhtahoon, main smile kiye bina nahi reh sakta yeh ek little spark of happiness jaisa hota hai.  No matter mera din kaisa bhi ja raha ho, hamari conversations sab kuch lighter aur brighter feel karati hain.
+
+Tum mein ek tareeka hai simple moments ko special banane ka.
+
+Yeh sirf iske baare mein nahi hai ki tum kitni beautiful ho; yeh warmth, kindness, aur charm ke baare mein hai jis tarah se tum baat karti ho. Tumhare words mein ek magic hai jo mujhe easy feel karata hai, aur tumhari presence hi joy laati hai.
+
+Maine kabhi nahi socha tha ki ek conversation itna kuch mean kar sakta hai, lekin tumhare saath, yeh karta hai. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+            Kabhi kabhi, main khud ko wish karta hoon mai humesha tumahre sath reh saku, sirf woh smile dekhne ke liye jo mera din bright kar deta hai aur woh voice sunne ke liye jo sab kuch lighter feel karata hai. Shayad yeh ek long shot hai, lekin yeh thought phir bhi wait karta hai.
+
+Hum ek dusre ko bahut time se jaante hain, main hope karta hoon ki tum mujhe nahi bhuloge. Hamare moments, hamari conversations—woh mere liye jitna tum soch sakti ho usse kahin zyada mean karte hain.
+
+No matter what happens, main truly wish karta hoon ki tumhe ek life mile filled with happiness, peace, aur sab kuch jo tum deserve karte ho. 💕
+
+Tum mere liye special person ho, aur main hope karta hoon ki life tumhe endless reasons de smile karne ke liye. No matter hum yahan se kahan jaate hain, main hamesha grateful rahunga us time ke liye jo humne share kiya. Aur agar fate ne kabhi allow kiya, toh shayad ek din hamare paths real mein cross karenge. ✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            Tum mere liye bahut important ho, aur main chahta hoon ki tum jaano ki main hamesha tumhare liye yahan rahunga, no matter what. Agar tumhe kabhi kuch bhi chahiye—koi sunane wala, koi support karne wala, ya sirf koi tumhe smile karane wala mai bas ek message door hoon.
+
+Mera time tumhara hai jab bhi tumhe chahiye.
+
+Life unpredictable ho sakti hai, lekin main hope karta hoon ki tum kabhi akeli feel na karo. Chahe good day ho ya tough one, main hamesha yahan rahunga tumhe support karne ke liye, tumhe yaad dilane ke liye ki tum kitne amazing ho.
+
+Tum sirf happiness deserve karti ho, aur agar main uska ek chota sa part ban sakun, toh main honored feel karunga. No matter life hume kahan le jaaye, bas jaano ki tumhare paas hamesha koi hoga jo care karta hai—koi jo truly tum mein believe karta hai. 💕
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+            Kya hum ek moment le sakte hain appreciate karne ke liye ki tum kitni sundar lagti ho jo bhi pehenti ho?Tum mujhe sari mai bahut sundar aur bahut pyari lagti ho maine bahut baar dekha hai tumko sari mai har bar dekh ke tumki smile karta hu.
+
+            Mai to sochta hu ki kitni cute aur sundar ho tum.
+            
+            Tum mein kuch aisa hai jo logon ko attract karta hai—shayad yeh tumhari elegance hai, tumhari warmth hai, ya sirf jis tarah se tum kisi bhi room mein enter karti ho usko light up kar deti ho. Jo bhi hai, yeh undeniable hai, aur yeh tumhe absolutely perfect banata hai har tarah se.
+            
+            Lekin tumhari beauty se bhi beyond, yeh tumhari kindness aur jis tarah se tum mujhe special feel karati ho woh hai jo tumhe truly alag karta hai. Tum bahut positive ho, aur tumhari dil bahut saaf hai aur tum mere liye bahut precious ho.
+            
+            No matter tum kahan ho ya kya karti ho, mai tumhe kabhi bhul nahi sakta tum humesha mere dil mai rahogi meri first priority banke. 💖✨
+          </p>
+        </div>
+        <div class="back">
+          <h2>Absolutely Breathtaking ✨💖</h2>
+          <p>
+            Jo bhi pehenti ho, tum bahut sundar lagti ho. Yeh sirf tumhare looks ki baat nahi hai—yeh jis tarah se tum apne aap ko itne confidence aur grace ke saath carry karti ho woh hai jo tumhe truly mesmerizing banata hai.
+
+Main completely in awe hoon tumhara.
+
+Tumhari presence hi kisi bhi space ko bright kar sakti hai, aur tumhari energy simply magnetic hai. Jis tarah se tum move karti ho, jis tarah se tum smile karti ho, aur jis tarah se tum mujhe easy feel karati ho—yeh sab tumhare saaf maan ka part hai.
+
+Tum mere liye mera sab kuch ho; tum lasting impressions chhod jaati ho. Tum mai kuch aisa  hai jo impossible bana deta hai tumse rehna tumse baat kiye bina rehna.
+
+Tum sirf beautiful nahi ho—tum ek work of art ho, inside and out 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+            Main bas ek moment lena chahta hoon tumhe batane ke liye ki main tumhe kitna appreciate karta hoon. Shuru se hi, tum truly special person ho—koi jisko main words se explain nahi kar sakta.
+
+Tumse milna, even for a short time, ek gift raha hai.
+
+Tumhari kindness, tumhari presence, aur jis tarah se tum har conversation ko meaningful feel karate ho mere liye jitna tum sochti ho usse kahin zyada mean karta hai. Main grateful hoon ki hamare paths cross hue, aur no matter future mein kya hota hai, main hamesha tumhara thankful rahunga.
+
+Kuch log hamare hearts pe mark chhod jaate hain bina try kiye—aur tum unmein se ek ho. 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>Jab se humne baat karna shuru kiya hai, tum mere mind mein best possible way mein rahi ho. Tumhari kindness, tumhari beauty, tumhari care tumhare baare mein sab kuch mujhe itna special feel hota hai.
+
+            Tum meri world brighter banati ho, mere days better, aur mera heart thoda aur fuller.
+            
+            Mujhe nahi pata future mein kya hoga, lekin main ek cheez jaanta hoon—main tumhe humesha apne side mein rakhnunga tumse important mere liye koi nahi hoga. Toh, yahan hai mera question, seedha dil se…
+            
+            Will you be my Valentine? 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>Cutest Queen</h3>
+          <p>
+            Content:By Ankit<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
